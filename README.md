@@ -12,7 +12,7 @@
 -    The contstraints on livestock production are total feed supply and TDN and CP balance.
 -    The common constraints on all goods are total agricultural labor supply and unit labor demand.
 -    Baseline scenario (current food and feed import) and the import decline scenario is avialable.
--    Post-hoc analysis is available by entering any value as the estimated reduction area in yield due to reduced pesticide use.
+-    Post-hoc analysis is available by entering any value as the estimated reduction area in yield due to reduced pesticide use.  
 Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys Model.   
 
 --------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys 
          d)  agricultural labor supply and usage balance.
 -  The contstraints on livestock production are total feed supply and TDN and CP balance.
 -  The common constraints on all goods are total agricultural labor supply and unit labor demand.
--  As well as baseline scenario (no food and feed import), the import decline scenario is avialable.
+-  As well as baseline scenario (no food and feed import), the import decline scenario is avialable.  
 Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys Model.  
 
 ## Build 2.4 Nov 17 2025
