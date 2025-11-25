@@ -21,10 +21,10 @@ Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys 
 -  Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods, 13 feeds, 7 livestocks, 5 animal products and 2 marine products.
 -  The objective function consists of calorie deficit and net food intake balance of 8 food groups.
 -  The contstraints on cropping are
-        - arable land endowments by total acreage and cropping season;
-        - expansion margin for each crop;
-        - total fertilizer supply and element usage (constanat or variable) balance; and
-        - agricultural labor supply and usage balance.
+         - arable land endowments by total acreage and cropping season;
+         - expansion margin for each crop;
+         - total fertilizer supply and element usage (constanat or variable) balance; and
+         - agricultural labor supply and usage balance.
 -  The contstraints on livestock production are total feed supply and TDN and CP balance.
 -  The common constraints on all goods are total agricultural labor supply and unit labor demand.
 -  As well as baseline scenario (no food and feed import), the import decline scenario is avialable.
