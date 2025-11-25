@@ -6,7 +6,7 @@
 -  The objective function consists of calorie deficit and food intake balance of 8 food groups.  
 -  The contstraints on cropping are a) arable land endowments by total acreage and month; b) expansion margin for each crop; and c) total fertilizer supply and N, P, K balance.  
 -  The contstraints on livestock production are total feed supply and TDN and CP balance.   
-- The common constraints on all goods are total agricultural labor supply and unit labor demand.  
+-  The common constraints on all goods are total agricultural labor supply and unit labor demand.  
 -  As well as baseline scenario (no food and feed import), the import decline scenario is avialable.  
 MAFF Open Lab.(2024) Food Supply Simulation in Japan applying the SWISSfoodSys Model.  
 
@@ -14,22 +14,22 @@ MAFF Open Lab.(2024) Food Supply Simulation in Japan applying the SWISSfoodSys M
 
 ## Build 2.3 Feb 16 2025
 
-Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods, 13 feeds, 7 livestocks, 5 animal products and 2 marine products.  
-The objective function consists of calorie deficit and food intake balance of 8 food groups.  
-The contstraints on cropping are arable land endowments by total acreage and month, and expansion margin for each crop.  
-The contstraints on livestock production are total feed supply and TDN and CP balance.  
-Besides baseline scenario (no food and feed import), optional import decline scenario is avialable.  
+-  Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods, 13 feeds, 7 livestocks, 5 animal products and 2 marine products.  
+-  The objective function consists of calorie deficit and food intake balance of 8 food groups.  
+-  The contstraints on cropping are arable land endowments by total acreage and month, and expansion margin for each crop.  
+-  The contstraints on livestock production are total feed supply and TDN and CP balance.  
+-  Besides baseline scenario (no food and feed import), optional import decline scenario is avialable.  
 MAFF Open Lab.(2024) Food Supply Simulation in Japan applying the SWISSfoodSys Model.   
 
 ## Build 2.1 Nov 28 2024
 
-Cropping model with 16 crops, 2 marine products, 6 processing foods.  
-Livestock model with 13 feeds, 7 livestocks, 5 animal products.  
-Objective function is calorie deficit and food intake balance of 8 food groups.  
-Contstraints on cropping with arable land endowments and expansion margins for each crops.  
-Contstraints on livestock production with feed distribution and feed TDN and CP balance.  
-Simultaneous simulation for croping and animal production models.  
-Optional module for import decline.  
+-  Cropping model with 16 crops, 2 marine products, 6 processing foods.  
+-  Livestock model with 13 feeds, 7 livestocks, 5 animal products.  
+-  Objective function is calorie deficit and food intake balance of 8 food groups.  
+-  Contstraints on cropping with arable land endowments and expansion margins for each crops.  
+-  Contstraints on livestock production with feed distribution and feed TDN and CP balance.  
+-  Simultaneous simulation for croping and animal production models.  
+-  Optional module for import decline.  
 Ishikawa K., (2024), Pre-simulation for Swiss Food Model. The MAFF Open Lab.  
 
 ## Build 1.5 Jan 13 2024
