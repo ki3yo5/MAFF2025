@@ -1,7 +1,7 @@
 $title  Food Supply Simulation in Japan applying the SWISSfoodSys Model
 
 $onText
-Build 2.5 Nov 24 2025
+Build 2.6 Nov 26 2025
 Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods,
 13 feeds, 7 livestocks, 5 animal products and 2 marine products.
 The objective function consists of calorie deficit and net food intake balance of 8 food groups.
@@ -19,7 +19,7 @@ $offText
 * set build version name:
 $if not setglobal build   $setglobal build 2.6
 * set variable import scenario (0=baseline(0%), 1=20%, 2=40%, 3=60%, 4=100%):
-$if not setglobal idc_scn $setglobal idc_scn 0
+$if not setglobal idc_scn $setglobal idc_scn 4
 * enter any value in [0,100] as reduction rate % of chemical fertilizer import:
 $if not setglobal fdc_rate $setglobal fdc_rate 0
 * enter any value in [0,100] as rate % of no pestiside area in post-hoc analysis:
@@ -30,16 +30,16 @@ $if not setglobal rate    $setglobal rate   1
 * include constraints on fertilizer element balance (do not set 1 if liebig is 1):
 $if not setglobal fbal    $setglobal fbal   0
 * include variable yield and fertilizer application (do not set 1 if fbal is 1):
-$if not setglobal liebig  $setglobal liebig 1
+$if not setglobal liebig  $setglobal liebig 0
 * include constraints on labor balance:
 $if not setglobal lbal    $setglobal lbal   1
 
 * generate land usage report:
-$if not setglobal landrep       $setglobal landrep       1
-* generate fertilizer balance report (recommend set 1 if fbal and liebig is 0):
-$if not setglobal fertilizerrep $setglobal fertilizerrep 1
-* generate labor balance report (recommend set 1 if lbal s 0):
-$if not setglobal laborrep      $setglobal laborrep      1
+$if not setglobal landrep       $setglobal landrep  1
+* generate fertilizer balance report:
+$if not setglobal fertilizerrep $setglobal fertrep  1
+* generate labor balance report:
+$if not setglobal laborrep      $setglobal laborrep 1
 
 * set variable upper limit for cropping area expansion (default = 300%):
 $if not setglobal scn_exp $setglobal scn_exp 0
@@ -47,11 +47,22 @@ $if not setglobal scn_exp $setglobal scn_exp 0
 $if not setglobal scn_fyr $setglobal scn_fyr 0
 * set grain stockpile release scenario:
 $if not setglobal scn_gsp $setglobal scn_gsp 0
-* set feed stockpile release scenario:(under development)
+* set feed stockpile release scenario:(TBD)
 $if not setglobal scn_fsp $setglobal scn_fsp 0
 
-$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_results.gdx
-$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_results.xlsx
+* set key for naming output files
+$if not setglobal key $setglobal key %fbal%_%liebig%
+* name output files
+$iftheni %KEY% == 1_0
+$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_fbal_results.gdx
+$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_fbal_results.xlsx
+$elseif %KEY% == 0_1
+$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_liebig_results.gdx
+$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_liebig_results.xlsx
+$else
+$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_results.gdx
+$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_results.xlsx
+$endif
 
 
 
@@ -123,7 +134,8 @@ Set
     swine
     broiler
     layinghens    /
-    
+    x item of goods /set.g, set.ls/
+
     
 * crop classification 
     paddy(c)
@@ -136,6 +148,8 @@ Set
     /mandarin,apple,mis_fruits/
     local(c)
     /scane,sbeat/
+    second(c)
+    /pwheat,pbarley,psoy/
    
 * food groups
     edible(c)
@@ -160,6 +174,7 @@ Set
     ag animal product groups /
     meat          'meats'
     egg_dairy     'egg and dairy'/
+    tg total food groups/set.cg, set.ag/
 
 * model arguments
     t cropping month
@@ -249,7 +264,19 @@ set
    other.(oil,miso,soysource,mis_foods)      /
    amap(ag,ap)  ap groups to animal products mapping  /
    meat.(beef,pork,chicken)
-   egg_dairy.(egg,milk)                    /;
+   egg_dairy.(egg,milk)                    /
+   tmap(tg,x)   food groups to goods mapping  /
+   grain.(rice,wheat,pwheat,barley,pbarley,naked,mis_grains)
+   tuber.(sweetp,potato)
+   pulse.(soy,psoy,mis_beans)
+   veget.(green_veges,mis_veges)
+   fruit.(mandarin,apple,mis_fruits)
+   starch.(starch)
+   sugar.(sugar,scane,sbeat)
+   other.(oil,miso,soysource,mis_foods,rapeseed)
+   meat.(beef,pork,chicken,dairyox,swine,broiler)
+   egg_dairy.(egg,milk,dairycow,heifer,calves,layinghens)    /
+;
 
 
 
@@ -373,17 +400,21 @@ parameter
     bagasse      0.46 /;
 
 Scalar
-    land         'total land size (1000ha)'         /  4325  /
-    lpaddy       'paddy field (1000ha)'             /  2352  /
-    lupland      'total upland field (1000ha)'      /  1973  /
-    lfield       'cropping field (1000ha)'          /  1123  /
-    lorchard     'orchard (1000ha)'                 /   259  /
-    lpasture     'pasture (1000ha)'                 /   591  /
-    labor        'total labor supply (bilion h)'    /  30.5  /
+    land         'total land size (1000ha)'                           /  4325  /
+    lpaddy       'total paddy field (1000ha)'                         /  2352  /
+    lconvertible 'convertible paddy field (1000ha)'                   /  1110  /
+    lupland      'total upland field (1000ha)'                        /  1973  /
+    lfield       'cropping field (1000ha)'                            /  1123  /
+    lorchard     'orchard (1000ha)'                                   /   259  /
+    lpasture     'pasture (1000ha)'                                   /   591  /
+    labor        'total labor supply (bilion h)'                      /  30.5  /
+    westregion   'proportion of kanto and west area'                  / 0.654  /
     
-    dummy        'dummy value to zyield and fert'   /  1e-5  /
+    dummy        'dummy value to linear term of zyield and fert'      /  1e-5  /
     rdc_rate_cf  'reduction rate % of chemical fertilizere import'    /%fdc_rate%/
     rate_npe     'rate % of no pestiside area '                       /%npe_rate%/
+
+    lsecond      'second crop in paddy field (1000ha)'
 
     spent      'rate of dairycow spent for beef production'
     culled     'rate of layinghens culled for chicken prodution'
@@ -392,6 +423,8 @@ Scalar
     limit      'default upper limit for area expansion and feed production'
     weight     'default weight on calorie balance';
 
+    lsecond   = lconvertible*westregion;
+    
     spent     = (447200/2) / 861700;
     culled    = 83304000 / 182661000;
     lactating = 736500 / 861800;
@@ -542,12 +575,13 @@ Positive Variable xcrop, xlive, yfeed, zyield, fert;
 $sTitle Equations
 Equation
     ybal          'Land balance on          paddy    (1000ha)'
-    fbal                                    upland   (1000ha)'
+    ubal                                    upland   (1000ha)'
     pbal                                    pasture  (1000ha)'
     obal                                    orchard  (1000ha)'
+    sbal                                    second   (1000ha)''
    
-    aybal         'Cropping area balance on paddy    (1000ha)'
-    afbal                                   upland   (1000ha)'
+    aybal         'Expansion upper bound on paddy    (1000ha)'
+    aubal                                   upland   (1000ha)'
     apbal                                   pasture  (1000ha)'
     aobal                                   orchard  (1000ha)'
     albal                                   local    (1000ha)'
@@ -603,12 +637,13 @@ Equation
     rat           'Objective function evaluated as rate of shortage';
 
     ybal(t)..    sum(c, xcrop(c)*landreq(c,t) $ paddy(c))   =l= lpaddy;
-    fbal(t)..    sum(c, xcrop(c)*landreq(c,t) $ field(c))   =l= lfield;
+    ubal(t)..    sum(c, xcrop(c)*landreq(c,t) $ field(c))   =l= lfield;
     pbal(t)..    sum(c, xcrop(c)*landreq(c,t) $ pasture(c)) =l= lpasture;
     obal(t)..    sum(c, xcrop(c)*landreq(c,t) $ orchard(c)) =l= lorchard;
+    sbal(t)..    sum(c, xcrop(c)*landreq(c,t) $ second(c))  =l= lsecond;
 
     aybal(c)..   xcrop(c) $ paddy(c)   =l= limit    *data(c,"area") $ paddy(c);
-    afbal(c)..   xcrop(c) $ field(c)   =l= limit    *data(c,"area") $ field(c);
+    aubal(c)..   xcrop(c) $ field(c)   =l= limit    *data(c,"area") $ field(c);
     apbal(c)..   xcrop(c) $ pasture(c) =l= 1        *data(c,"area") $ pasture(c);
     aobal(c)..   xcrop(c) $ orchard(c) =l= 1        *data(c,"area") $ orchard(c);
     albal(c)..   xcrop(c) $ local(c)   =l= (limit/2)*data(c,"area") $ local(c);
@@ -710,7 +745,7 @@ $ifi %liebig%==1                       - sum(c, zyield(c))*dummy - sum((c,e), fe
 
 
 $sTitle Model definition and solve
-    Model crop_constraint   / ybal,fbal,pbal,obal, aybal,afbal,apbal,aobal,albal
+    Model crop_constraint   / ybal,ubal,pbal,obal,sbal, aybal,aubal,apbal,aobal,albal
 $iftheni %fbal%==1
                               eledemand,elesupply,elebal
 $endif
@@ -785,7 +820,13 @@ Set
     potential   'Potential animal population(head)'
     change      'Change in population       (head)'
     roc         'Rate of change             (%)'
-    carcass     'Carcass by early slaughter'/;
+    carcass     'Carcass by early slaughter'/
+    ltype /
+    paddy
+    field
+    orchard
+    pasture
+    /;
 
 Parameter
     wxcrop(w,*)  'Cropping area by weight   (1000ha)'
@@ -821,24 +862,22 @@ Parameter
     radar        'Radar chart summary for crop group'
     aradar       'Radar chart summary for animal product group'
     
-*   Land use report by land classification
+*   Input use report by land classification
    
-    paddyrep     'Land report summary on paddy'
-    fieldrep     'Land report summary on field'
-    pasturerep   'Land report summary on pasture'
-    orchardrep   'Land report summary on orchard'
+    paddyrep     'Land report summary on paddy   (1000ha)'
+    fieldrep     'Land report summary on field   (1000ha)'
+    pasturerep   'Land report summary on pasture (1000ha)'
+    orchardrep   'Land report summary on orchard (1000ha)'
+    landrep      'Land allocation summary        (1000ha)'
+    landrep_g
+        
+    fertrep      'Fertilizer usage report summary (each element MT)'
+    fertrep_g
     
-    landrep      'Land allocation summary'
-    
-*   Other input use report
-    
-    fbalrep      'Fertilizer element balance report summary'
-    fdeficit     'Fertilizer element deficit'
-    fapprep      'Fertilizer application rate (if liebig is 1)'
-    yieldrep     'Effective yield by actual fertilizer application rate (t/ha)'
-    
-    lbalrep      'Labor balance report summary'
-    ldeficit     'Labor deficit'
+    laborrep     'Labor allocation report summary (hour)'
+    laborrep_g
+
+    yieldrep
     
 *   Grain stockpile release scenario
 
@@ -966,7 +1005,7 @@ $ifi %liebig%==1                                          *zyield.l(i)/data(i,"y
     
 
 
-$sTitle Land use report by land classification
+$sTitle Input use report by land classification
 * set limit = 3, weight = 0.75
 
     paddyrep(t,c) = wxcrop("w75",c)*landreq(c,t) $ paddy(c);
@@ -993,27 +1032,43 @@ $sTitle Land use report by land classification
     landrep("current","orchard",c) = data(c,"area") $ orchard(c);
     landrep("current","orchard","total") = lorchard;
     
+    landrep_g(w,ltype,tg) = sum(x $tmap(tg,x), landrep(w,ltype,x));
+    landrep_g(w,ltype,"total") = sum(tg, landrep_g(w,ltype,tg));
+    landrep_g("current",ltype,tg) = sum(x $tmap(tg,x), landrep("current",ltype,x));
+    landrep_g("current",ltype,"total") = sum(tg, landrep_g("current",ltype,tg));
 
-
-$sTitle Other input use report
-
-    fbalrep(w,e,c) = wxcrop(w,c)*edemand(c,e)
+    
+    fertrep(w,e,c) = wxcrop(w,c)*edemand(c,e)
 $ifi %liebig%==1                *fert.l(c,e)/edemand(c,e)              
     ;
-    fbalrep(w,e,"total") = sum(c,fbalrep(w,e,c));
-    fdeficit(w,e) = fbalrep(w,e,"total") - esupply("prod",e) - esupply("import",e) - esupply("organic",e);
+    fertrep(w,e,"total") = sum(c,fertrep(w,e,c));
+    fertrep("current",e,c) = data(c,"area")*edemand(c,e)
+$ifi %liebig%==1                           *fert.l(c,e)/edemand(c,e)              
+    ;
+    fertrep("current",e,"total") = sum(c,fertrep("current",e,c));
+    
+    fertrep_g(w,e,tg) = sum(x $tmap(tg,x),fertrep(w,e,x));
+    fertrep_g(w,e,"total") = sum(tg, fertrep_g(w,e,tg));
+    fertrep_g("current",e,tg) = sum(x $tmap(tg,x),fertrep("current",e,x));
+    fertrep_g("current",e,"total") = sum(tg, fertrep_g("current",e,tg));
 
+    laborrep(w,c)          = wxcrop(w,c)*ldemand_c(c)*(10**4);
+    laborrep("current",c)  = data(c,"area")*ldemand_c(c)*(10**4);
+    laborrep(w,ls)         = wxlive(w,ls)*ldemand_ls(ls);
+    laborrep("current",ls) = head(ls)*ldemand_ls(ls);
+    laborrep(w,"total")    = sum(c,laborrep(w,c)) + sum(ls,laborrep(w,ls));
+    laborrep("current","total") = sum(c,laborrep("current",c)) + sum(ls,laborrep("current",ls));
+
+    laborrep_g(w,tg)       = sum(x $tmap(tg,x),laborrep(w,x));
+    laborrep_g(w,"total")  = sum(tg, laborrep_g(w,tg));
+    laborrep_g("current",tg)  = sum(x $tmap(tg,x),laborrep("current",x));
+    laborrep_g("current","total") = sum(tg, laborrep_g("current",tg));
+    
 $iftheni %liebig%==1
-    fapprep(c,e) = fert.l(c,e);
     yieldrep(c,"effective")  = zyield.l(c);
     yieldrep(c,"current")    = data(c,"yield");
     yieldrep(c,"decrease")   = yieldrep(c,"current") - yieldrep(c,"effective");
 $endif
-    
-    lbalrep(w,c)  = wxcrop(w,c)*ldemand_c(c)*(10**4);
-    lbalrep(w,ls) = wxlive(w,ls)*ldemand_ls(ls);
-    lbalrep(w,"total") = sum(c,lbalrep(w,c)) + sum(ls,lbalrep(w,ls));
-    ldeficit(w)   = lbalrep(w,"total") - labor*(10**9);
 
  
 
@@ -1181,9 +1236,8 @@ $sTitle Feed stockpile release scenario
 $sTitle Export Results
 Execute_Unload '%gdx_results%',
     wcroprep, wfoodrep, wliverep, wdietrep, radar, aradar,
-    landrep, fbalrep, fdeficit,
-$ifi %liebig%==1 fapprep, yieldrep,
-    lbalrep, ldeficit,
+    landrep,landrep_g, fertrep,fertrep_g, laborrep,laborrep_g,
+$ifi %liebig%==1 yieldrep,
     lcroprep, lfoodrep, ldietrep,
     mcroprep, mfoodrep, mdietrep,
     stock, period
@@ -1197,21 +1251,18 @@ execute 'gdxxrw %gdx_results% o=%excel_results% par=radar    rng=radar!A1 rdim=2
 execute 'gdxxrw %gdx_results% o=%excel_results% par=aradar   rng=radar!A35 rdim=2 cdim=1'
 
 $iftheni %landrep%==1
-execute 'gdxxrw %gdx_results% o=%excel_results% par=landrep  rng=landrep!A1 rdim=1 cdim=2'
+execute 'gdxxrw %gdx_results% o=%excel_results% par=landrep    rng=landrep!A1 rdim=1 cdim=2'
+execute 'gdxxrw %gdx_results% o=%excel_results% par=landrep_g rng=landrep!A9 rdim=1 cdim=2'
 $endif
 
-$iftheni %fertilizerrep%==1
-execute 'gdxxrw %gdx_results% o=%excel_results% par=fbalrep  rng=fbalrep!A1 rdim=1 cdim=2'
-execute 'gdxxrw %gdx_results% o=%excel_results% par=fdeficit rng=fdeficit!A1 rdim=1 cdim=1'
-$iftheni %liebig%==1
-execute 'gdxxrw %gdx_results% o=%excel_results% par=fapprep  rng=fapprep!A1 rdim=1 cdim=1'
-execute 'gdxxrw %gdx_results% o=%excel_results% par=yieldrep rng=yieldrep!A1 rdim=1 cdim=0'
-$endif
+$iftheni %fertrep%==1
+execute 'gdxxrw %gdx_results% o=%excel_results% par=fertrep    rng=fertrep!A1 rdim=1 cdim=2'
+execute 'gdxxrw %gdx_results% o=%excel_results% par=fertrep_g rng=fertrep!A9 rdim=1 cdim=2'
 $endif
 
 $iftheni %laborrep%==1
-execute 'gdxxrw %gdx_results% o=%excel_results% par=lbalrep  rng=lbalrep!A1 rdim=1 cdim=1'
-execute 'gdxxrw %gdx_results% o=%excel_results% par=ldeficit rng=ldeficit!A1 rdim=1 cdim=0'
+execute 'gdxxrw %gdx_results% o=%excel_results% par=laborrep    rng=laborrep!A1 rdim=1 cdim=1'
+execute 'gdxxrw %gdx_results% o=%excel_results% par=laborrep_g rng=laborrep!A9 rdim=1 cdim=1'
 $endif
 
 $iftheni %scn_exp%==1
