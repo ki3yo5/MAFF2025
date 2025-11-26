@@ -1,7 +1,7 @@
 # MAFF2023-2025
 ## Food Supply Simulation in Japan applying the SWISSfoodSys Model
 
-## Build 2.6 Nov 24 2025
+## Build 2.6 Nov 26 2025
 -    Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods, 13 feeds, 7 livestocks, 5 animal products and 2 marine products.
 -    The objective function consists of calorie deficit and net food intake balance of 8 food groups.
 -    The contstraints on cropping are
