@@ -19,12 +19,18 @@ $offText
 * set build version name:
 $if not setglobal build   $setglobal build 2.6
 * set variable import scenario (0=baseline(0%), 1=20%, 2=40%, 3=60%, 4=100%):
-$if not setglobal idc_scn $setglobal idc_scn 4
-* enter any value in [0,100] as reduction rate % of chemical fertilizer import:
-$if not setglobal fdc_rate $setglobal fdc_rate 0
-* enter any value in [0,100] as rate % of no pestiside area in post-hoc analysis:
-$if not setglobal npe_rate $setglobal npe_rate 10
+$if not setglobal scn_idc $setglobal scn_idc 4
+* set variable upper limit for cropping area expansion (default = 300%):
+$if not setglobal scn_exp $setglobal scn_exp 0
+* set first-year cropping scenario:
+$if not setglobal scn_fyr $setglobal scn_fyr 0
+* set grain stockpile release scenario:
+$if not setglobal scn_gsp $setglobal scn_gsp 0
+* set feed stockpile release scenario:(TBD)
+$if not setglobal scn_fsp $setglobal scn_fsp 0
 
+* enter any value in [0,100] as rate % of no pestiside area in post-hoc analysis:
+$if not setglobal npe_rate $setglobal npe_rate 0
 * evaluate calorie deficit and nutrient intake by rate not by difference:
 $if not setglobal rate    $setglobal rate   1
 * include constraints on fertilizer element balance (do not set 1 if liebig is 1):
@@ -41,27 +47,19 @@ $if not setglobal fertilizerrep $setglobal fertrep  1
 * generate labor balance report:
 $if not setglobal laborrep      $setglobal laborrep 1
 
-* set variable upper limit for cropping area expansion (default = 300%):
-$if not setglobal scn_exp $setglobal scn_exp 0
-* set first-year cropping scenario:
-$if not setglobal scn_fyr $setglobal scn_fyr 0
-* set grain stockpile release scenario:
-$if not setglobal scn_gsp $setglobal scn_gsp 0
-* set feed stockpile release scenario:(TBD)
-$if not setglobal scn_fsp $setglobal scn_fsp 0
 
 * set key for naming output files
 $if not setglobal key $setglobal key %fbal%_%liebig%
 * name output files
 $iftheni %KEY% == 1_0
-$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_fbal_results.gdx
-$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_fbal_results.xlsx
+$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%scn_idc%_npe%npe_rate%_fbal_results.gdx
+$if not setglobal excel_results $setglobal excel_results .\results\%build%_%scn_idc%_npe%npe_rate%_fbal_results.xlsx
 $elseif %KEY% == 0_1
-$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_liebig_results.gdx
-$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_liebig_results.xlsx
+$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%scn_idc%_npe%npe_rate%_liebig_results.gdx
+$if not setglobal excel_results $setglobal excel_results .\results\%build%_%scn_idc%_npe%npe_rate%_liebig_results.xlsx
 $else
-$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_results.gdx
-$if not setglobal excel_results $setglobal excel_results .\results\%build%_%idc_scn%_fdc%fdc_rate%_npe%npe_rate%_results.xlsx
+$if not setglobal gdx_results   $setglobal gdx_results   .\results\%build%_%scn_idc%_npe%npe_rate%_results.gdx
+$if not setglobal excel_results $setglobal excel_results .\results\%build%_%scn_idc%_npe%npe_rate%_results.xlsx
 $endif
 
 
@@ -359,7 +357,7 @@ $gdxin
 $gdxin nvalue.gdx
 $load nvalue
 $gdxin
-$include data_idc_scn%idc_scn%.gms
+$include data_idc_scn%scn_idc%.gms
 $include data_ydc.gms
 
     esupply("organic",e) = max(0,
@@ -411,7 +409,6 @@ Scalar
     westregion   'proportion of kanto and west area'                  / 0.654  /
     
     dummy        'dummy value to linear term of zyield and fert'      /  1e-5  /
-    rdc_rate_cf  'reduction rate % of chemical fertilizere import'    /%fdc_rate%/
     rate_npe     'rate % of no pestiside area '                       /%npe_rate%/
 
     lsecond      'second crop in paddy field (1000ha)'
@@ -662,7 +659,7 @@ Equation
     dec(c)..     xcrop(c) $ mmap("dec",c) =l= data(c,"area") $ mmap("dec",c);
 
     eledemand(e)..        eled(e)  =e= sum(c, xcrop(c)*edemand(c,e));
-    elesupply(e)..        eles(e)  =e= esupply("prod",e) + (1-rdc_rate_cf/100)*esupply("import",e) + esupply("organic",e);
+    elesupply(e)..        eles(e)  =e= esupply("prod",e) + esupply("import",e) + esupply("organic",e);
     elebal(e)..           eled(e)  =l= eles(e);
     
     Liebig(c,e)..         zyield(c) =l= fertcoef(c,e,"intercept") + fertcoef(c,e,"slope")*fert(c,e);    
@@ -723,20 +720,20 @@ $ifi %liebig%==1                       - sum(c, zyield(c))*dummy - sum((c,e), fe
 *   Add a “very small linear term” to the objective function to avoid the saddle point solutions (all zero).       
                                          ;
 
-    droc..         deltasumsq     =e= sqrt(
+    droc..         deltasumsq     =e= 
                                            sum(cg, sqr(
-                                                       delta(cg)/sum(c $cmap(cg,c),nnpc(c))/k(cg))
-                                                       )/card(cg)
+                                                       (delta(cg)/sum(c $cmap(cg,c), nnpc(c))) / k(cg)
+                                                       )
                                            );
     
     adbal(ag)..    adelta(ag)     =e= sum(ap $amap(ag,ap), nnpc(ap)-impc(ag)
                                                            - sum(ls,xlive(ls)*x2a(ap,ls)) /(tpop*(10**6)*365)
                                          );
 
-    adroc..        adeltasumsq    =e= sqrt(
+    adroc..        adeltasumsq    =e= 
                                            sum(ag, sqr(
-                                                       adelta(ag)/sum(ap $amap(ag,ap),nnpc(ap))/j(ag))
-                                                       )/card(ag)
+                                                       (adelta(ag)/sum(ap $amap(ag,ap), nnpc(ap))) / j(ag)
+                                                       )
                                            );
 
     dif..          target         =e= weight*cdeficit + (1-weight)*(sum(cg,delta(cg))   +sum(ag,adelta(ag)));
@@ -825,8 +822,7 @@ Set
     paddy
     field
     orchard
-    pasture
-    /;
+    pasture/;
 
 Parameter
     wxcrop(w,*)  'Cropping area by weight   (1000ha)'
@@ -886,20 +882,17 @@ Parameter
     period       'Estimated maximum duration of stockpile release    (days)';
 
 * test run
-* do not erase
+* do not change
 limit = 3;
 weight = 0.75;
-if(%rate%,
-    solve sol_rat minimizing target using nlp ;
-else
     solve sol_dif minimizing target using nlp ;
-);
 
 Display xcrop.l, xlive.l, yfeed.l, dms.l, 
 $ifi %fbal%==1   eled.l, eles.l
 $ifi %lbal%==1   labd_c.l, labd_ls.l
 $ifi %liebig%==1 zyield.l, fert.l
         cdeficit.l, crate.l, deltasumsq.l, adeltasumsq.l ;
+
 
 
 $sTitle Scenario by weight (weight = 100, 75, 50, 25)
