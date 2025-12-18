@@ -1,6 +1,11 @@
 # MAFF2023-2025
 ## Food Supply Simulation in Japan applying the SWISSfoodSys Model
 
+## Build 2.7 Dec 18 2025
+-    variable cropping pattern (rice and wheat based; potato based)
+
+--------------------------------------------------------------------------------------
+
 ## Build 2.6 Nov 26 2025
 -    Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods, 13 feeds, 7 livestocks, 5 animal products and 2 marine products.
 -    The objective function consists of calorie deficit and net food intake balance of 8 food groups.
@@ -14,8 +19,6 @@
 -    Baseline scenario (current food and feed import) and the import decline scenario is avialable.
 -    Post-hoc analysis is available by entering any value as the estimated reduction area in yield due to reduced pesticide use.  
 Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys Model.   
-
---------------------------------------------------------------------------------------
 
 ## Build 2.5 Nov 24 2025
 -  Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods, 13 feeds, 7 livestocks, 5 animal products and 2 marine products.
