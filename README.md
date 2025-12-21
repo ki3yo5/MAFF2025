@@ -2,7 +2,8 @@
 ## Food Supply Simulation in Japan applying the SWISSfoodSys Model
 
 ## Build 2.7 Dec 18 2025
--    variable cropping pattern (rice and wheat based; potato based)
+-    2.7a: Variable cropping pattern (rice and wheat based; potato based)
+-    2.7b: Land and regional classification is available for crops.
 
 --------------------------------------------------------------------------------------
 
