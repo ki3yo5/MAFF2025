@@ -3,17 +3,16 @@ $title  Food Supply Simulation in Japan applying the SWISSfoodSys Model
 $onText
 Build 2.7a Dec 18 2025
 Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods,
-18 feeds, 7 livestocks, 5 animal products and 2 marine products.
+18 feeds, 7 livestocks, 5 animal products and 2 marine products .
 The objective function consists of calorie deficit and net food intake balance of 8 food groups.
-The contstraints on cropping are a) arable land endowments by total acreage and cropping season;
-                                 b) expansion margin for each crop;
-                                 c) total fertilizer supply and element usage (constanat or variable) balance; and
-                                 d) agricultural labor supply and usage balance.
+The contstraints on cropping are a) arable land endowments in total acreage and each cropping month;
+                                 b) expansion margin;
+                                 c) fertilizer supply and usage (constanat or variable) balance by element; and
 The contstraints on livestock production are total feed supply and TDN and CP balance.
-THe common constraints on all goods are total agricultural labor supply and unit labor demand.
-Cropping pattern clasiffication is available.
-Baseline scenario (current food and feed import) and the import decline scenario is avialable.
-Post-hoc analysis is available by setting no-pestiside area to deduct the yield.
+The common constraints on agricultural labor supply and usage balance.
+Variable cropping patterns (rice and wheat based; potato based).
+Baseline scenario (current food and feed import) and import decline scenarios.
+Post-hoc analysiy for no-pestiside area to deduct the yield.
 Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys Model. 
 $offText
 
@@ -1272,6 +1271,8 @@ parameter
     allow(pattern,"pbarley") = 0;
     allow(pattern,"naked") = 0;
     allow(pattern,"rapeseed") = 0;
+    allow(pattern,"corn") = 0;
+    allow(pattern,"sorghum") = 0;
 *Rice and wheat-centered cropping
     allow("rice_wheat","sweetp") = 0;
     allow("rice_wheat","potato") = 0;

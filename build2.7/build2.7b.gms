@@ -3,17 +3,17 @@ $title  Food Supply Simulation in Japan applying the SWISSfoodSys Model
 $onText
 Build 2.7b Dec 21 2025
 Simultaneous simulation for croping and animal production models with 16 crops, 6 processing foods,
-18 feeds, 7 livestocks, 5 animal products and 2 marine products.
+18 feeds, 7 livestocks, 5 animal products and 2 marine products .
 The objective function consists of calorie deficit and net food intake balance of 8 food groups.
-The contstraints on cropping are a) arable land endowments by total acreage and cropping season;
-                                 b) expansion margin for each crop;
-                                 c) total fertilizer supply and element usage (constanat or variable) balance; and
-                                 d) agricultural labor supply and usage balance.
+The contstraints on cropping are a) arable land endowments in total acreage and each cropping month;
+                                 b) expansion margin;
+                                 c) fertilizer supply and usage (constanat or variable) balance by element; and
 The contstraints on livestock production are total feed supply and TDN and CP balance.
-The common constraints on all goods are total agricultural labor supply and unit labor demand.
-Land and regional classification is available for crops.
-Baseline scenario (current food and feed import) and the import decline scenario is avialable.
-Post-hoc analysis is available by setting no-pestiside area to deduct the yield.
+The common constraints on agricultural labor supply and usage balance.
+Variable cropping patterns (rice and wheat based; potato based)
+Considered arable land types and regions for crops.
+Baseline scenario (current food and feed import) and import decline scenarios.
+Post-hoc analysiy for no-pestiside area to deduct the yield.
 Ishikawa et al.(2025) Food Supply Simulation in Japan applying the SWISSfoodSys Model. 
 $offText
 
@@ -142,8 +142,6 @@ Set
     layinghens    /
     x item of goods /set.g, set.ls/
     
-
-    
 * crop classification to land type
     paddy(c)       'Paddy field'
     /rice,pwheat,pbarley,psweetp,ppotato,psoy/
@@ -153,12 +151,8 @@ Set
     /mandarin,apple,mis_fruits/
     pasture(c)     'Pasture'
     /corn,sorghum/
-    second(c)      'Convertible paddy field in Kanto and western regions'
-    /pwheat,pbarley,psweetp,ppotato,psoy/
     local(c)       'Upland field in Hokkaido and Okinawa'
     /scane,sbeat/  
-
-
    
 * food groups
     staple(c)
@@ -412,30 +406,19 @@ $include data_ydc.gms
 
 Display mmap, rmap, lmap, CRL, esupply, ldemand_c;
 
-*As of 2023(R5)
+
 Scalar
-    lpaddy       'total paddy field (1000ha)'                         /  2352  /
-    lconvertible 'convertible paddy field (1000ha)'                   /  1110  /
-    lupland      'total upland field (1000ha)'                        /  1973  /
-    lfield       'cropping field (1000ha)'                            /  1123  /
-    lorchard     'orchard (1000ha)'                                   /   259  /
-    lpasture     'pasture (1000ha)'                                   /   591  /
     labor        'total labor supply (bilion h)'                      /  2.96  /
-    westregion   'proportion of kanto and west area'                  / 0.654  /
     
     dummy        'dummy value to linear term of zyield and fert'      /  1e-5  /
     rate_npe     'rate % of no pestiside area '                       /  %npe% /
-
-    lsecond      'second crop in paddy field (1000ha)'
-
+    
     spent      'rate of dairycow spent for beef production'
     culled     'rate of layinghens culled for chicken prodution'
     lactating  'rate of dairycow lactating for milk production'
 
     limit      'default upper limit for area expansion and feed production'
     weight     'default weight on calorie balance';
-
-    lsecond   = lconvertible*westregion;
     
     spent     = (447200/2) / 861700;
     culled    = 83304000 / 182661000;
@@ -629,13 +612,7 @@ Positive Variable xrlcrop, xcrop, xlive, yfeed, zyield, fert;
 $sTitle Equations
 Equation
     link          'xrlcrop to xcrop link by summation'
-
     landbal       'Monthly land balance on each land type (1000ha)'
-    landbal_y     'Monthly land balance on paddy field  (1000ha)'
-    landbal_u     'Monthly land balance on upland filed (1000ha)'
-    landbal_p     'Monthly land balance on pasture      (1000ha)'
-    landbal_o     'Monthly land balance on orchard      (1000ha)'    
-    landbal_s     'Monthly land balance on second crops (1000ha)'
    
     areamax_y     'Area upper bound on paddy crops   (1000ha)'
     areamax_u     'Area upper bound on upland crops  (1000ha)'
@@ -693,34 +670,27 @@ Equation
     dif           'Objective function evaluated as difference value'
     rat           'Objective function evaluated as rate of shortage';
 
-    link(c)..   sum((r,l)$CRL(c,r,l), xrlcrop(c,r,l)) =e= xcrop(c);
-    
-    landbal(t,r,l)..  sum(c$CRL(c,r,l), xrlcrop(c,r,l) * landreq(c,t)) =l= land(r,l);
+    link(c)..             sum((r,l)$CRL(c,r,l), xrlcrop(c,r,l)) =e= xcrop(c);
+    landbal(t,r,l)..      sum(c$CRL(c,r,l), xrlcrop(c,r,l) * landreq(c,t)) =l= land(r,l);
 
-    landbal_y(t)..    sum(c, xcrop(c)*landreq(c,t) $ paddy(c))   =l= lpaddy;
-    landbal_u(t)..    sum(c, xcrop(c)*landreq(c,t) $ field(c))   =l= lfield;
-    landbal_p(t)..    sum(c, xcrop(c)*landreq(c,t) $ pasture(c)) =l= lpasture;
-    landbal_o(t)..    sum(c, xcrop(c)*landreq(c,t) $ orchard(c)) =l= lorchard;    
-    landbal_s(t)..    sum(c, xcrop(c)*landreq(c,t) $ second(c))  =l= lsecond;
+    areamax_y(c)..        xcrop(c) $ paddy(c)   =l= limit*data(c,"area") $ paddy(c);
+    areamax_u(c)..        xcrop(c) $ field(c)   =l= limit*data(c,"area") $ field(c);
+    areamax_p(c)..        xcrop(c) $ pasture(c) =l=       data(c,"area") $ pasture(c);
+    areamax_o(c)..        xcrop(c) $ orchard(c) =l=       data(c,"area") $ orchard(c);
+    areamax_l(c)..        xcrop(c) $ local(c)   =l= areaMax(c)           $ local(c);
 
-    areamax_y(c)..   xcrop(c) $ paddy(c)   =l= limit*data(c,"area") $ paddy(c);
-    areamax_u(c)..   xcrop(c) $ field(c)   =l= limit*data(c,"area") $ field(c);
-    areamax_p(c)..   xcrop(c) $ pasture(c) =l=       data(c,"area") $ pasture(c);
-    areamax_o(c)..   xcrop(c) $ orchard(c) =l=       data(c,"area") $ orchard(c);
-    areamax_l(c)..   xcrop(c) $ local(c)   =l= areaMax(c)           $ local(c);
-
-    jan(c)..     xcrop(c) $ mmap("jan",c) =l= data(c,"area") $ mmap("jan",c);
-    feb(c)..     xcrop(c) $ mmap("feb",c) =l= data(c,"area") $ mmap("feb",c);
-    mar(c)..     xcrop(c) $ mmap("mar",c) =l= data(c,"area") $ mmap("mar",c);
-    apr(c)..     xcrop(c) $ mmap("apr",c) =l= data(c,"area") $ mmap("apr",c);
-    may(c)..     xcrop(c) $ mmap("may",c) =l= data(c,"area") $ mmap("may",c);
-    jun(c)..     xcrop(c) $ mmap("jun",c) =l= data(c,"area") $ mmap("jun",c);
-    jul(c)..     xcrop(c) $ mmap("jul",c) =l= data(c,"area") $ mmap("jul",c);
-    aug(c)..     xcrop(c) $ mmap("aug",c) =l= data(c,"area") $ mmap("aug",c);
-    sep(c)..     xcrop(c) $ mmap("sep",c) =l= data(c,"area") $ mmap("sep",c);
-    oct(c)..     xcrop(c) $ mmap("oct",c) =l= data(c,"area") $ mmap("oct",c);
-    nov(c)..     xcrop(c) $ mmap("nov",c) =l= data(c,"area") $ mmap("nov",c);
-    dec(c)..     xcrop(c) $ mmap("dec",c) =l= data(c,"area") $ mmap("dec",c);
+    jan(c)..              xcrop(c) $ mmap("jan",c) =l= data(c,"area") $ mmap("jan",c);
+    feb(c)..              xcrop(c) $ mmap("feb",c) =l= data(c,"area") $ mmap("feb",c);
+    mar(c)..              xcrop(c) $ mmap("mar",c) =l= data(c,"area") $ mmap("mar",c);
+    apr(c)..              xcrop(c) $ mmap("apr",c) =l= data(c,"area") $ mmap("apr",c);
+    may(c)..              xcrop(c) $ mmap("may",c) =l= data(c,"area") $ mmap("may",c);
+    jun(c)..              xcrop(c) $ mmap("jun",c) =l= data(c,"area") $ mmap("jun",c);
+    jul(c)..              xcrop(c) $ mmap("jul",c) =l= data(c,"area") $ mmap("jul",c);
+    aug(c)..              xcrop(c) $ mmap("aug",c) =l= data(c,"area") $ mmap("aug",c);
+    sep(c)..              xcrop(c) $ mmap("sep",c) =l= data(c,"area") $ mmap("sep",c);
+    oct(c)..              xcrop(c) $ mmap("oct",c) =l= data(c,"area") $ mmap("oct",c);
+    nov(c)..              xcrop(c) $ mmap("nov",c) =l= data(c,"area") $ mmap("nov",c);
+    dec(c)..              xcrop(c) $ mmap("dec",c) =l= data(c,"area") $ mmap("dec",c);
 
     eledemand(e)..        eled(e)  =e= sum(c, xcrop(c)*edemand(c,e));
     elesupply(e)..        eles(e)  =e= esupply("prod",e) + esupply("import",e) + esupply("organic",e);
@@ -752,58 +722,56 @@ Equation
     distbal(fe)..         dms(fe)  =g= sum(ls, yfeed(ls,fe));
     distbal_stock(fe)..   dms(fe)  =g= sum(ls, yfeed(ls,fe))-fconst(fe,"stock");
 
-    bredbal(ls)..  xlive(ls) =l= limit*head(ls);    
-    dairyoxrep..   head("dairyox")*xlive("dairycow") =l= xlive("dairyox")*head("dairycow");
-    heiferrep..    head("heifer") *xlive("dairycow") =l= xlive("heifer") *head("dairycow");
-    calfrep..      head("calves") *xlive("dairycow") =l= xlive("calves") *head("dairycow");
+    bredbal(ls)..         xlive(ls) =l= limit*head(ls);    
+    dairyoxrep..          head("dairyox")*xlive("dairycow") =l= xlive("dairyox")*head("dairycow");
+    heiferrep..           head("heifer") *xlive("dairycow") =l= xlive("heifer") *head("dairycow");
+    calfrep..             head("calves") *xlive("dairycow") =l= xlive("calves") *head("dairycow");
                                                                            
-    cbal..         cdeficit       =e= nreq("calorie")-imnn("calorie")
-                                       -(sum(c,xcrop(c)*x2nn(c,"calorie")
-$ifi %liebig%==1                                       *zyield(c)/data(c,"yield")                                          
-                                            )
-                                        +sum((i,c),xcrop(i)*x2fn(c,i,"calorie")
-$ifi %liebig%==1                                           *zyield(i)/data(i,"yield")              
-                                            )
-                                        +sum((ap,ls),xlive(ls)*x2an(ap,ls,"calorie"))
-                                        ) /(tpop*(10**6)*365)
-$ifi %liebig%==1                       - sum(c, zyield(c))*dummy - sum((c,e), fert(c,e))*dummy
+    cbal..                cdeficit =e= nreq("calorie")-imnn("calorie")
+                                                      -(sum(c,xcrop(c)*x2nn(c,"calorie")
+$ifi %liebig%==1                                                      *zyield(c)/data(c,"yield")                                          
+                                                          )
+                                                      +sum((i,c),xcrop(i)*x2fn(c,i,"calorie")
+$ifi %liebig%==1                                                         *zyield(i)/data(i,"yield")              
+                                                          )
+                                                      +sum((ap,ls),xlive(ls)*x2an(ap,ls,"calorie"))
+                                                      ) /(tpop*(10**6)*365)
+$ifi %liebig%==1                       -sum(c, zyield(c))*dummy - sum((c,e), fert(c,e))*dummy
 *   Add a “very small linear term” to the objective function to avoid the saddle point solutions (all zero).       
-                                        ;
-    croc..         crate          =e= cdeficit/nreq("calorie")
-$ifi %liebig%==1                       - sum(c, zyield(c))*dummy - sum((c,e), fert(c,e))*dummy
+                          ;
+    croc..                crate =e= cdeficit/nreq("calorie")
+$ifi %liebig%==1                    -sum(c, zyield(c))*dummy - sum((c,e), fert(c,e))*dummy
 *   Add a “very small linear term” to the objective function to avoid the saddle point solutions (all zero).       
-                                        ;                                   
+                          ;                                   
     
-    dbal(cg)..     delta(cg)      =e= sum(c $cmap(cg,c), nnpc(c)-impc(c)
-                                                         - (xcrop(c)*x2n(c)
-$ifi %liebig%==1                                                    *zyield(c)/data(c,"yield")              
-                                                            +sum(i,xcrop(i)*x2f(c,i)
+    dbal(cg)..            delta(cg) =e= sum(c $cmap(cg,c), nnpc(c)-impc(c)
+                                                           -(xcrop(c)*x2n(c)
+$ifi %liebig%==1                                                      *zyield(c)/data(c,"yield")              
+                                                             +sum(i,xcrop(i)*x2f(c,i)
 $ifi %liebig%==1                                                    *zyield(i)/data(i,"yield")              
-                                                                )
-                                                           ) /(tpop*(10**6)*365)
-                                         )
-$ifi %liebig%==1                       - sum(c, zyield(c))*dummy - sum((c,e), fert(c,e))*dummy
+                                                                 )
+                                                             ) /(tpop*(10**6)*365)
+                                           )
+$ifi %liebig%==1                       -sum(c, zyield(c))*dummy - sum((c,e), fert(c,e))*dummy
 *   Add a “very small linear term” to the objective function to avoid the saddle point solutions (all zero).       
-                                         ;
+                          ;
 
-    droc..         deltasumsq     =e= 
-                                           sum(cg, sqr(
-                                                       (delta(cg)/sum(c $cmap(cg,c), nnpc(c))) / k(cg)
-                                                       )
-                                           );
+    droc..                deltasumsq =e= sum(cg, sqr(
+                                                    (delta(cg)/sum(c $cmap(cg,c), nnpc(c))) / k(cg)
+                                                    )
+                                         );
     
-    adbal(ag)..    adelta(ag)     =e= sum(ap $amap(ag,ap), nnpc(ap)-impc(ag)
-                                                           - sum(ls,xlive(ls)*x2a(ap,ls)) /(tpop*(10**6)*365)
+    adbal(ag)..           adelta(ag) =e= sum(ap $amap(ag,ap), nnpc(ap)-impc(ag)
+                                                              - sum(ls,xlive(ls)*x2a(ap,ls)) /(tpop*(10**6)*365)
                                          );
 
-    adroc..        adeltasumsq    =e= 
-                                           sum(ag, sqr(
-                                                       (adelta(ag)/sum(ap $amap(ag,ap), nnpc(ap))) / j(ag)
-                                                       )
-                                           );
+    adroc..               adeltasumsq =e= sum(ag, sqr(
+                                                      (adelta(ag)/sum(ap $amap(ag,ap), nnpc(ap))) / j(ag)
+                                                     )
+                                          );
 
-    dif..          target         =e= weight*cdeficit + (1-weight)*(sum(cg,delta(cg))   +sum(ag,adelta(ag)));
-    rat..          target         =e= weight*crate    + (1-weight)*(deltasumsq +adeltasumsq);
+    dif..                 target =e= weight*cdeficit + (1-weight)*(sum(cg,delta(cg))+sum(ag,adelta(ag)));
+    rat..                 target =e= weight*crate    + (1-weight)*(deltasumsq +adeltasumsq);
 
 
 
@@ -1260,14 +1228,14 @@ Changes in parameter landreq
   b. Post-calculation: vegetable cropping area using residual land area and residual labor
 $offText
 
-*Convert pasture to farmland (treat pasture the same as field) except Hokkaido 
+*Convert pasture to farmland (treat pasture the same as field) except Hokkaido
     land("temperate","field") = land("temperate","field") + land("temperate","pasture");
     land("temperate","pasture") = 0;
     land("subtropical","field") = land("subtropical","field") + land("subtropical","pasture");
     land("subtropical","pasture") = 0;
 *Convert fish production to TAC limit 4650(1000MT) to adjust net food value
     data("fish","net") = data("fish","net")*4650/data("fish","prod");
-*Alternate x2n and x2nn with converter that include "processing" into netfood
+*Alternate x2n and x2nn to include "processing" into netfood for staple food group
     x2n(c) $staple(c) = data(c,"yield")*(data(c,"gross")+data(c,"processing"))/data(c,"total")*g2n(c)*(10**9);
     x2nn(c,nn) $staple(c) = x2n(c)*nnvalue(c,nn);
     
@@ -1282,6 +1250,8 @@ parameter
     allow(pattern,"pbarley") = 0;
     allow(pattern,"naked") = 0;
     allow(pattern,"rapeseed") = 0;
+    allow(pattern,"corn") = 0;
+    allow(pattern,"sorghum") = 0;
 *Rice and wheat-centered cropping
     allow("rice_wheat","sweetp") = 0;
     allow("rice_wheat","potato") = 0;
