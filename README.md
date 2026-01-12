@@ -3,8 +3,8 @@
 
 ## Build 2.7 Dec 18 2025
 -    2.7: Variable cropping pattern (rice and wheat based; potato based)
-         -    2.7a: Single land type and region for cropping.
-         -    2.7b: Differentiated land type (paddy_dry, field_irr) and region (Hokkaido, Tohoku, Kanto_west, Okinawa) for cropping.
+-    2.7a: Single land type and region for cropping.
+-    2.7b: Differentiated land type (paddy_dry, field_irr) and region (Hokkaido, Tohoku, Kanto_west, Okinawa) for cropping.
 
 --------------------------------------------------------------------------------------
 
