@@ -7,20 +7,20 @@
 -    2.7b: Differentiated land type (paddy_dry, field_irr), region (Hokkaido, Tohoku_Hokuriku, Kanto_West, Okinawa) and cropping season (Hokkaido and Others).
 
 ## scenario setting in main file
-### set import scenario (0=baseline(0%), 1=20%, 2=40%, 3=60%, 4=100%): idc
-### set rate of no pestiside area in post-hoc analysis (any value in [0,100]): npe
-### set 1/0 to evaluate calorie deficit and nutrient intake by rate not by difference: rate (1 is recommended) 
-### set 1/0 to include constraints on fertilizer element balance (do not set 1 if liebig is 1): fbal
-### set 1/0 to include variable yield and fertilizer application (do not set 1 if fbal is 1): liebig
-### set 1/0 to include deserted land on land balance: dsrt
-### set 1/0 to include constraints on labor balance: lbal
+-    set import scenario (0=baseline(0%), 1=20%, 2=40%, 3=60%, 4=100%): idc
+-    set rate of no pestiside area in post-hoc analysis (any value in [0,100]): npe
+-    set 1/0 to evaluate calorie deficit and nutrient intake by rate not by difference: rate (1 is recommended) 
+-    set 1/0 to include constraints on fertilizer element balance (do not set 1 if liebig is 1): fbal
+-    set 1/0 to include variable yield and fertilizer application (do not set 1 if fbal is 1): liebig
+-    set 1/0 to include deserted land on land balance: dsrt
+-    set 1/0 to include constraints on labor balance: lbal
 
 ## scenario variation in main file (multiple selection possible)
-### set 1/0 to variate weight for calorie deficit in objective fuction: scn_weight
-### set 1/0 to variate upper limit for cropping area expansion: scn_areaMax
-### set 1/0 to variate cropping pattern: scn_pattern
-### set 1/0 to variate first-year cropping scenario: scn_firstYr
-### set 1/0 to activate grain stockpile release scenario: scn_stockRe
+-    set 1/0 to variate weight for calorie deficit in objective fuction: scn_weight
+-    set 1/0 to variate upper limit for cropping area expansion: scn_areaMax
+-    set 1/0 to variate cropping pattern: scn_pattern
+-    set 1/0 to variate first-year cropping scenario: scn_firstYr
+-    set 1/0 to activate grain stockpile release scenario: scn_stockRe
 
 ## file included
 ### main files (open this file to execute simulation)
