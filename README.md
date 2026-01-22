@@ -2,7 +2,7 @@
 ## Food Supply Simulation in Japan applying the SWISSfoodSys Model
 
 ## Build 2.7 Jan 19 2026
--    2.7: Variable cropping pattern (rice and wheat based; potato based)
+-    2.7: Added scenario variation cropping pattern: scn_pattern
 -    2.7a: Unified arable land across country.
 -    2.7b: Differentiated land type (paddy_dry, field_irr), region (Hokkaido, Tohoku_Hokuriku, Kanto_West, Okinawa) and cropping season (Hokkaido and Others).
 
