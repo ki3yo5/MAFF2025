@@ -24,37 +24,37 @@
 
 ## file included
 ### main files (open this file to execute simulation)
-   build2.Xa.gms       'Unified arable land across country'
-   build2.Xb.gms       'Differentiate land type and region for cropping'
+   build2.Xa.gms       'Unified arable land across country'  
+   build2.Xb.gms       'Differentiate land type and region for cropping'  
 ### branch files (set scenario parameters)
-   data_idc_scn0.gms   'Import decline rate for goods and feeds'
-   data_idc_scn1.gms
-   data_idc_scn2.gms
-   data_idc_scn3.gms
-   data_idc_scn4.gms
-   data_ydc.gms        'Yield reduction rate in no pestiside use area'
+   data_idc_scn0.gms   'Import decline rate for goods and feeds'  
+   data_idc_scn1.gms  
+   data_idc_scn2.gms  
+   data_idc_scn3.gms  
+   data_idc_scn4.gms  
+   data_ydc.gms        'Yield reduction rate in no pestiside use area'  
 ### data files
-   climreq.gdx         'Climate requirement by crop (0/1)'
-   edemand.gdx         'Fertilizer element demand (each element: kg/ha)'
-   esupply.gdx         'Fertilizer element supply (each element: t)'
-   fconst_imp.gdx      'Feed constraints       (t)'
-   fdemand.gdx         'Feed nutrient demand   (TDN:kilograms per head, CP:%)'
-   fertcoef.gdx        'Fertilizer input coefficients'
-   fsupply.gdx         'Feed nutrient supply   (%)'
-   intake.gdx          'Required daily intake of nutrients'
-   land_dsrt.gdx       'Deserted land (1000ha)'
-   land_endw.gdx       'Land endowment (1000ha)'
-   landreq_alt.gdx     'Seasonal requirement by crop (0/1) alternative for build2.Xa.gms'
-   landreq_hok.gdx     'Seasonal requirement by crop (0/1) for build2.Xb.gms'
-   landreq_oth.gdx
-   ldemand_c.gdx       'Labor dmenad (h/10a -> h/1000ha)'
-   ldemand_l.gdx       'Labor dmenad (h/head)'
-   nvalue.gdx          'Nutritive supply and value of foods'
-   prod_alt.gdx        'Production data'
-   typereq.gdx         'Land type requirement by crop (0/1)'
+   climreq.gdx         'Climate requirement by crop (0/1)'  
+   edemand.gdx         'Fertilizer element demand (each element: kg/ha)'  
+   esupply.gdx         'Fertilizer element supply (each element: t)'  
+   fconst_imp.gdx      'Feed constraints       (t)'  
+   fdemand.gdx         'Feed nutrient demand   (TDN:kilograms per head, CP:%)'  
+   fertcoef.gdx        'Fertilizer input coefficients'  
+   fsupply.gdx         'Feed nutrient supply   (%)'  
+   intake.gdx          'Required daily intake of nutrients'  
+   land_dsrt.gdx       'Deserted land (1000ha)'  
+   land_endw.gdx       'Land endowment (1000ha)'  
+   landreq_alt.gdx     'Seasonal requirement by crop (0/1) alternative for build2.Xa.gms'  
+   landreq_hok.gdx     'Seasonal requirement by crop (0/1) for build2.Xb.gms'  
+   landreq_oth.gdx  
+   ldemand_c.gdx       'Labor dmenad (h/10a -> h/1000ha)'  
+   ldemand_l.gdx       'Labor dmenad (h/head)'  
+   nvalue.gdx          'Nutritive supply and value of foods'  
+   prod_alt.gdx        'Production data'  
+   typereq.gdx         'Land type requirement by crop (0/1)'  
 ### output listing file (open this file to check solve status)
-   build2.X.lst
-   xlsx2gdx.lst
+   build2.X.lst  
+   xlsx2gdx.lst  
    
 --------------------------------------------------------------------------------------
 
