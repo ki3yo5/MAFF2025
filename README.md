@@ -7,13 +7,16 @@
 -    2.7b: Differentiated land type (paddy_dry, field_irr), region (Hokkaido, Tohoku_Hokuriku, Kanto_West, Okinawa) and cropping season (Hokkaido and Others).
 
 ## Scenario setting in main file
--    set import scenario (0=baseline(0%), 1=20%, 2=40%, 3=60%, 4=100%): idc
+-    set import decline scenario (0=baseline(0%), 1=20%, 2=40%, 3=60%, 4=100%): imscn
+-    set rate of chemical fertilizer import decline (any value in [0,100]): ncf
 -    set rate of no pestiside area in post-hoc analysis (any value in [0,100]): npe
--    set 1/0 to evaluate calorie deficit and nutrient intake by rate not by difference: rate (1 is recommended) 
 -    set 1/0 to include constraints on fertilizer element balance (do not set 1 if liebig is 1): fbal
 -    set 1/0 to include variable yield and fertilizer application (do not set 1 if fbal is 1): liebig
--    set 1/0 to include deserted land on land balance: dsrt
+-    set 1/0 to include deserted land into land endowment: dsrt
 -    set 1/0 to include constraints on labor balance: lbal
+-    set 1/0 to include young animals for reproduction: reprod
+-    set 1/0 to include CP balance in feed nutrient: CP
+-    set 1/0 to evaluate calorie deficit and nutrient intake by rate not by difference: rate
 
 ## Scenario variation in main file (multiple selection possible)
 -    set 1/0 to variate weight for calorie deficit in objective fuction: scn_weight
@@ -25,33 +28,11 @@
 ## File included
 ### main files (open this file to execute simulation)
 -    build2.Xa.gms       'Unified arable land across country'  
--    build2.Xb.gms       'Differentiate land type and region for cropping'  
-### branch files (set scenario parameters)
--    data_idc_scn0.gms   'Import decline rate for goods and feeds'  
--    data_idc_scn1.gms  
--    data_idc_scn2.gms  
--    data_idc_scn3.gms  
--    data_idc_scn4.gms  
--    data_ydc.gms        'Yield reduction rate in no pestiside use area'  
+-    build2.Xb.gms       'Differentiate land type and region for cropping'   
 ### data files
--    climreq.gdx         'Climate requirement by crop (0/1)'  
--    edemand.gdx         'Fertilizer element demand (each element: kg/ha)'  
--    esupply.gdx         'Fertilizer element supply (each element: t)'  
--    fconst_imp.gdx      'Feed constraints       (t)'  
--    fdemand.gdx         'Feed nutrient demand   (TDN:kilograms per head, CP:%)'  
--    fertcoef.gdx        'Fertilizer input coefficients'  
--    fsupply.gdx         'Feed nutrient supply   (%)'  
--    intake.gdx          'Required daily intake of nutrients'  
--    land_dsrt.gdx       'Deserted land (1000ha)'  
--    land_endw.gdx       'Land endowment (1000ha)'  
--    landreq_alt.gdx     'Seasonal requirement by crop (0/1) alternative for build2.Xa.gms'  
--    landreq_hok.gdx     'Seasonal requirement by crop (0/1) for build2.Xb.gms'  
--    landreq_oth.gdx  
--    ldemand_c.gdx       'Labor dmenad (h/10a -> h/1000ha)'  
--    ldemand_l.gdx       'Labor dmenad (h/head)'  
--    nvalue.gdx          'Nutritive supply and value of foods'  
--    prod_alt.gdx        'Production data'  
--    typereq.gdx         'Land type requirement by crop (0/1)'  
+-    data_year.gdx  
+-    parameters.gdx  
+-    sets.gdx  
 ### output listing file (open this file to check solve status)
 -    build2.X.lst  
 -    xlsx2gdx.lst  
