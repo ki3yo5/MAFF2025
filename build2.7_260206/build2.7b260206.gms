@@ -312,7 +312,7 @@ $endif
     impc(g) $import(g) = im(g)/(tpop*(10**6)*365) $import(g);
     imnn(nn)           = sum(g, impc(g)*nnvalue(g,nn) $import(g));
 
-Display CRT, esupply, ldemand_c, land_endw;
+Display CRT, esupply, ldemand_c, land_endw, acoef;
 
 
 
@@ -1142,7 +1142,7 @@ if(%rate%,
 * Control croppable plants
     xrlcrop.up(c,r,l)$(not allow(pattern,c)) = 0;
 * No cropping over winter season in Tohoku_Hokuriku
-*    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
+    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
   if(%unlim%,
     solve sol_rat_unlimited minimizing target using nlp ;
   else
@@ -1167,7 +1167,7 @@ else
 * Control croppable plants
     xrlcrop.up(c,r,l)$(not allow(pattern,c)) = 0;
 * No cropping over winter season in Tohoku_Hokuriku
-*    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
+    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
   if(%unlim%,
     solve sol_dif_unlimited minimizing target using nlp ;
   else
@@ -1294,7 +1294,7 @@ display resLand, resLabor, resFert, xveg_resLand, xveg_resLabor, xveg_resFert, x
     plandrep_month(pattern,t,l,c)        = sum(r, pxrlcrop(pattern,c,r,l)*CRT(c,r,t));
     plandrep_month(pattern,t,l,"total")  = sum(c, plandrep_month(pattern,t,l,c));
 *Assign "veges" values by post-calculation
-    plandrep_region(pattern,"total","veges") = xveg(pattern);
+    plandrep_region(pattern,"total","veges") = pxcrop(pattern,"veges");
 
     plaborrep(pattern,c)                 = pxcrop(pattern,c) *ldemand_c(c) /(10**9);
     plaborrep("current",c)               = data(c,"area")    *ldemand_c(c) /(10**9);
