@@ -51,8 +51,8 @@ $if not setglobal rate   $setglobal rate   1
 $if not setglobal fbal   $setglobal fbal   1
 * include variable yield and fertilizer application (do not set 1 if fbal is 1):
 $if not setglobal liebig $setglobal liebig 0
-* set rate of chemical fertilizer import decline (any value in [0,100]):
-$if not setglobal ncf    $setglobal ncf    50
+* set rate of chemical fertilizer import (any value in [0,100]):
+$if not setglobal ncf    $setglobal cfim   50
 * set rate of no pestiside area (any value in [0,100]):
 $if not setglobal npe    $setglobal npe    0
 * include young animals for reproduction:
@@ -75,7 +75,7 @@ $batinclude appendTag.inc unlim   %unlim%
 $ifi not %unlim%==1 $batinclude appendTagVal.inc uval %uval%
 $batinclude appendTag.inc fbal    %fbal%
 $batinclude appendTag.inc liebig  %liebig%
-$batinclude appendTagVal.inc ncf  %ncf%
+$batinclude appendTagVal.inc cfim %cfim%
 $batinclude appendTagVal.inc npe  %npe%
 $batinclude appendTag.inc reprod  %reprod%
 $batinclude appendTag.inc CP      %CP%
@@ -178,9 +178,9 @@ Display CRL;
 
 $sTitle Parameters
 Scalar    
-    dummy      'Dummy value to linear term of zyield and fert'       / 1e-5  /
-    rate_ncf   'rate % of chemical fertilizer import decline'        / %ncf% /
-    rate_npe   'rate % of no pestiside area'                         / %npe% /
+    dummy      'Dummy value to linear term of zyield and fert'       / 1e-5   /
+    rate_cfim   'rate % of chemical fertilizer import'                / %cfim% /
+    rate_npe   'rate % of no pestiside area'                         / %npe%  /
     weight     'Weight on calorie balance in the objective function' / %wval% /
     limit      'Upper bound for area expansion and feed production'  / %uval% /
     ;
@@ -215,7 +215,7 @@ parameter
     fcoef(fe,c)       'Forage and Feed yield (MT/ha)'
     ycoef(c,l)        'Yield increase coefficient for "paddy_dry" and "field_irr"'
 * scenario
-    ncfcoef           'Chemical fertilizer import decline coefficient'
+    cfcoef           'Chemical fertilizer import decline coefficient'
     npecoef(c)        'No pestiside area yield decrease coefficent'
     yrrate(*)         'Yield reduction rate'
     irrate(*,*)       'Import reduation rate'
@@ -305,7 +305,7 @@ $endif
     x2an(ap,ls,nn) = x2a(ap,ls)*nnvalue(ap,nn)*0.8;
     x2fe(fe,c)     = fcoef(fe,c)*dmcoef(fe)*(10**3);
     
-    ncfcoef    = 1-rate_ncf/100;
+    cfcoef    = 1+rate_cfim/100;
     npecoef(c) = 1-yrrate(c)*rate_npe/100;
 
     im(g) $import(g)   = (1-irrate(g,'scn%imscn%'))*data(g,"import")*t2g(g)*g2n(g)*(10**9) $import(g);
@@ -466,8 +466,8 @@ Equation
     dec(c)..              xcrop(c) $ mmap(c,"dec") =l= data(c,"area") $ mmap(c,"dec");
 
     eledemand(e)..        eled(e)  =e= sum(c, xcrop(c)*edemand(c,e));
-    elesupply(e)..        eles(e)  =e= ncfcoef*esupply("prod",e) + ncfcoef*esupply("import",e) + esupply("organic",e);
-*   No chemical fertilizer coefficient (ncfcoef) involves import and production except nitrogen 
+    elesupply(e)..        eles(e)  =e= cfcoef*esupply("prod",e) + cfcoef*esupply("import",e) + esupply("organic",e);
+*   Chemical fertilizer coefficient (cfcoef) involves import and production except nitrogen 
     elebal(e)..           eled(e)  =l= eles(e);
 
 *   Liebig's Law of the Minimum yield(c) = min_e [ a(c,e) + b(c,e)*fert(c,e) ] is executed as 
@@ -1142,7 +1142,7 @@ if(%rate%,
 * Control croppable plants
     xrlcrop.up(c,r,l)$(not allow(pattern,c)) = 0;
 * No cropping over winter season in Tohoku_Hokuriku
-    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
+*    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
   if(%unlim%,
     solve sol_rat_unlimited minimizing target using nlp ;
   else
@@ -1167,7 +1167,7 @@ else
 * Control croppable plants
     xrlcrop.up(c,r,l)$(not allow(pattern,c)) = 0;
 * No cropping over winter season in Tohoku_Hokuriku
-    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
+*    xrlcrop.up(c,"Tohoku_Hokuriku",l)$winter(c) = 0;
   if(%unlim%,
     solve sol_dif_unlimited minimizing target using nlp ;
   else
@@ -1211,7 +1211,7 @@ scalar
     resLabor(pattern)      = sval("lsupply") - sum(c, pxcrop(pattern,c) * ldemand_c(c))/(10**9)
                                              - sum(ls, pxlive(pattern,ls)* ldemand_l(ls))/(10**9);
 * Residual fertilizer
-    resFert(pattern,e)     = esupply("prod",e) + ncfcoef*esupply("import",e) + esupply("organic",e)
+    resFert(pattern,e)     = esupply("prod",e) + cfcoef*esupply("import",e) + esupply("organic",e)
                                              - sum(c, pxcrop(pattern,c) * edemand(c,e)
 $ifi %lienig%==1                                                        * pfert(pattern,c,e)/edemand(c,e)                                          
                                                   );
