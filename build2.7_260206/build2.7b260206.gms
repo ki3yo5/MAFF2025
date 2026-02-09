@@ -1211,7 +1211,7 @@ scalar
     resLabor(pattern)      = sval("lsupply") - sum(c, pxcrop(pattern,c) * ldemand_c(c))/(10**9)
                                              - sum(ls, pxlive(pattern,ls)* ldemand_l(ls))/(10**9);
 * Residual fertilizer
-    resFert(pattern,e)     = esupply("prod",e) + cfcoef*esupply("import",e) + esupply("organic",e)
+    resFert(pattern,e)     = cfcoef*esupply("prod",e) + cfcoef*esupply("import",e) + esupply("organic",e)
                                              - sum(c, pxcrop(pattern,c) * edemand(c,e)
 $ifi %lienig%==1                                                        * pfert(pattern,c,e)/edemand(c,e)                                          
                                                   );

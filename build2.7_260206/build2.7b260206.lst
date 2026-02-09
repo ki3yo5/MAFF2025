@@ -1,4 +1,4 @@
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 1
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 1
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 C o m p i l a t i o n
 
@@ -85,7 +85,7 @@ BATINCLUDE C:\Users\ikiyo\OneDrive\MAFF_2025\workspace simul\appendTag.inc
  134   
  135   
  136   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 2
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 2
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Sets
 
@@ -205,7 +205,7 @@ GDXIN   C:\Users\ikiyo\OneDrive\MAFF_2025\workspace simul\sets.gdx
  224   
  225   
  226   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 3
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 3
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Parameters
 
@@ -371,7 +371,7 @@ GDXIN   C:\Users\ikiyo\OneDrive\MAFF_2025\workspace simul\parameters.gdx
  364   
  365   
  366   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 4
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 4
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Variables
 
@@ -422,7 +422,7 @@ Variables
  411   
  412   
  413   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 5
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 5
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Equations
 
@@ -612,7 +612,7 @@ Equations
  604   
  605   
  606   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 6
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 6
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Model definition and solve
 
@@ -676,7 +676,7 @@ Model definition and solve
  667   
  668   
  669   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 7
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 7
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Display Solutions
 
@@ -809,7 +809,7 @@ Display Solutions
  797   
  798   
  799   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 8
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 8
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Scenario by weight (weight = 100, 75, 50, 25)
 
@@ -925,7 +925,7 @@ Scenario by weight (weight = 100, 75, 50, 25)
  913   
  914   
  915   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 9
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 9
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Scenario by expansion margin (limit = 2, 3, 4, 5)
 
@@ -1035,7 +1035,7 @@ Scenario by expansion margin (limit = 2, 3, 4, 5)
 1023   
 1024   
 1025   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 10
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 10
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 First-year scenario
 
@@ -1120,7 +1120,7 @@ First-year scenario
 1104   
 1105   
 1106   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 11
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 11
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Scenario by cropping pattern
 
@@ -1267,7 +1267,7 @@ Scenario by cropping pattern
 1251      resLabor(pattern)      = sval("lsupply") - sum(c, pxcrop(pattern,c) * ldemand_c(c))/(10**9)
 1252                                               - sum(ls, pxlive(pattern,ls)* ldemand_l(ls))/(10**9);
 1253  * Residual fertilizer
-1254      resFert(pattern,e)     = esupply("prod",e) + cfcoef*esupply("import",e) + esupply("organic",e)
+1254      resFert(pattern,e)     = cfcoef*esupply("prod",e) + cfcoef*esupply("import",e) + esupply("organic",e)
 1255                                               - sum(c, pxcrop(pattern,c) * edemand(c,e)
 1257                                                    );
 1258  * Non-negativity check
@@ -1365,7 +1365,7 @@ Scenario by cropping pattern
 1354   
 1355   
 1356   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 12
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 12
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Grain stockpile release scenario
 
@@ -1388,7 +1388,7 @@ Grain stockpile release scenario
 1373   
 1374   
 1375   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 13
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 13
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Feed stockpile release scenario
 
@@ -1397,7 +1397,7 @@ Feed stockpile release scenario
 1378   
 1379   
 1380   
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 14
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 14
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Export Results
 
@@ -1425,7 +1425,7 @@ Export Results
 1414   
 1416   
 1418  );
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 15
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 15
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Include File Summary
 
@@ -1447,7 +1447,7 @@ Include File Summary
 
 
 COMPILATION TIME     =        0.000 SECONDS      3 MB  32.2.0 rc62c018 WEX-WEI
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 16
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 16
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 E x e c u t i o n
 
@@ -1647,7 +1647,7 @@ chicken                                           1.850       0.789
 egg                                                          18.900
 milk       3846.176
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 17
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 17
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Equation Listing    SOLVE sol_dif Using NLP From line 791
 
@@ -1960,7 +1960,7 @@ adietbal_r..  (0)*adelta(meat) + (0)*adelta(egg_dairy) + adeltasumsq =E= 0 ; (LH
 
 dif..  - 100*cdeficit + 99*delta(starch) + 99*delta(sugar) + 99*delta(grain) + 99*delta(tuber) + 99*delta(pulse) + 99*delta(veget) + 99*delta(fruit) + 99*delta(other) + 99*adelta(meat) + 99*adelta(egg_dairy) + target =E= 0 ; (LHS = 0)
      
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 18
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 18
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Column Listing      SOLVE sol_dif Using NLP From line 791
 
@@ -2403,7 +2403,7 @@ target
                 (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
         1       dif
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 19
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 19
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Model Statistics    SOLVE sol_dif Using NLP From line 791
 
@@ -2417,8 +2417,8 @@ DERIVATIVE POOL              20     CONSTANT POOL              26
 CODE LENGTH                  44
 
 
-GENERATION TIME      =        0.000 SECONDS      4 MB  32.2.0 rc62c018 WEX-WEI
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 20
+GENERATION TIME      =        0.047 SECONDS      4 MB  32.2.0 rc62c018 WEX-WEI
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 20
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Solution Report     SOLVE sol_dif Using NLP From line 791
 
@@ -2459,7 +2459,7 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 WEI x86 64bit/MS Window
  ** Optimal solution. Reduced gradient less than tolerance.
  
  
- CONOPT time Total                            0.003 seconds
+ CONOPT time Total                            0.008 seconds
    of which: Function evaluations             0.000 =  0.0%
              1st Derivative evaluations       0.000 =  0.0%
  
@@ -4079,7 +4079,7 @@ egg_dairy        -INF          120.1642        +INF             .
                              0  UNBOUNDED
                              0     ERRORS
                             67  PROJECTED
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 21
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 21
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 E x e c u t i o n
 
@@ -4305,7 +4305,7 @@ potato            1.000                   1.000                               1.
 rice_wheat        1.000       1.000       1.000                                                                               1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000
 combination       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000       1.000
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 22
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 22
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Equation Listing    SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -4564,7 +4564,7 @@ adietbal_r..  - (0.00234247739318768)*adelta(meat) - (0.000651411792457079)*adel
 
 rat..  - cshortrate + target =E= 0 ; (LHS = -745450.920559319, INFES = 745450.920559319 ****)
      
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 23
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 23
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Column Listing      SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -4997,7 +4997,7 @@ target
                 (.LO, .L, .UP, .M = -INF, -745454.103909589, +INF, 0)
         1       rat
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 24
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 24
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Model Statistics    SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -5014,10 +5014,10 @@ DERIVATIVE POOL              20     CONSTANT POOL              26
 CODE LENGTH                  44
 
 
-GENERATION TIME      =        0.015 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
+GENERATION TIME      =        0.000 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
                L O O P S            pattern potato
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 25
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 25
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Solution Report     SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -5058,7 +5058,7 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 WEI x86 64bit/MS Window
  ** Optimal solution. There are no superbasic variables.
  
  
- CONOPT time Total                            0.002 seconds
+ CONOPT time Total                            0.008 seconds
    of which: Function evaluations             0.000 =  0.0%
              1st Derivative evaluations       0.000 =  0.0%
  
@@ -6629,7 +6629,7 @@ egg_dairy        -INF          152.0180        +INF             .
                              0  UNBOUNDED
                              0     ERRORS
                             43  PROJECTED
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 26
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 26
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 E x e c u t i o n
 
@@ -6682,7 +6682,7 @@ layinghens                          419397.040              450935.077          
 
 fodder       4030620.000,    ricestraw    5860767.055,    ricebran      419397.040,    wheatstraw   2530300.812,    wheatbran     450935.077,    potatovines  1.729646E+7,    beetpulp       39309.624,    molasses       90644.372,    bagasse       174914.080,    meatbonemeal  164387.000,    fishmeal       55615.000
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 27
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 27
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Equation Listing    SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -6941,7 +6941,7 @@ adietbal_r..  - (0.00235529320077057)*adelta(meat) - (0.000824091627367495)*adel
 
 rat..  - cshortrate + target =E= 0 ; (LHS = 0)
      
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 28
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 28
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Column Listing      SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -7374,7 +7374,7 @@ target
                 (.LO, .L, .UP, .M = -INF, -4.57853388044417, +INF, 0)
         1       rat
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 29
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 29
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Model Statistics    SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -7394,7 +7394,7 @@ CODE LENGTH                  44
 GENERATION TIME      =        0.000 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
                L O O P S            pattern rice_wheat
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 30
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 30
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Solution Report     SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -7409,7 +7409,7 @@ Solution Report     SOLVE sol_rat_unlimited Using NLP From line 1187
 **** MODEL STATUS      2 Locally Optimal           
 **** OBJECTIVE VALUE               -3.9569
 
- RESOURCE USAGE, LIMIT          0.000 10000000000.000
+ RESOURCE USAGE, LIMIT          0.015 10000000000.000
  ITERATION COUNT, LIMIT         8    2147483647
  EVALUATION ERRORS              0             0
 CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 WEI x86 64bit/MS Window
@@ -7435,7 +7435,7 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 WEI x86 64bit/MS Window
  ** Optimal solution. There are no superbasic variables.
  
  
- CONOPT time Total                            0.000 seconds
+ CONOPT time Total                            0.005 seconds
    of which: Function evaluations             0.000 =  0.0%
              1st Derivative evaluations       0.000 =  0.0%
  
@@ -9006,7 +9006,7 @@ egg_dairy        -INF           78.1933        +INF             .
                              0  UNBOUNDED
                              0     ERRORS
                             57  PROJECTED
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 31
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 31
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 E x e c u t i o n
 
@@ -9059,7 +9059,7 @@ layinghens                          800918.856             1402646.312  808649.9
 
 fodder       4030620.000,    ricestraw    1.119226E+7,    ricebran      800918.856,    wheatstraw   7870572.249,    wheatbran    1402646.312,    soybeancake   808649.952,    beetpulp       39309.624,    molasses       90644.372,    bagasse       174914.080,    meatbonemeal  164387.000,    fishmeal       55615.000
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 32
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 32
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Equation Listing    SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -9318,7 +9318,7 @@ adietbal_r..  - (0.00232658084454111)*adelta(meat) - (0.000423887039311389)*adel
 
 rat..  - cshortrate + target =E= 0 ; (LHS = 0)
      
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 33
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 33
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Column Listing      SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -9751,7 +9751,7 @@ target
                 (.LO, .L, .UP, .M = -INF, -3.95687203571005, +INF, 0)
         1       rat
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 34
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 34
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Model Statistics    SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -9768,10 +9768,10 @@ DERIVATIVE POOL              20     CONSTANT POOL              26
 CODE LENGTH                  44
 
 
-GENERATION TIME      =        0.015 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
+GENERATION TIME      =        0.016 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
                L O O P S            pattern combination
 
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 35
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 35
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 Solution Report     SOLVE sol_rat_unlimited Using NLP From line 1187
 
@@ -9812,7 +9812,7 @@ CONOPT 3         32.2.0 rc62c018 Released Aug 26, 2020 WEI x86 64bit/MS Window
  ** Optimal solution. Reduced gradient less than tolerance.
  
  
- CONOPT time Total                            0.000 seconds
+ CONOPT time Total                            0.007 seconds
    of which: Function evaluations             0.000 =  0.0%
              1st Derivative evaluations       0.000 =  0.0%
  
@@ -11383,7 +11383,7 @@ egg_dairy        -INF          145.3207        +INF             .
                              0  UNBOUNDED
                              0     ERRORS
                             46  PROJECTED
-GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/08/26 11:11:35 Page 36
+GAMS 32.2.0  rc62c018 Released Aug 26, 2020 WEX-WEI x86 64bit/MS Windows - 02/09/26 15:47:13 Page 36
 Food Supply Simulation in Japan applying the SWISSfoodSys Model
 E x e c u t i o n
 
@@ -11474,11 +11474,11 @@ potato      0.767,    rice_wheat  1.582,    combination 1.247
 
 ----   1277 PARAMETER resFert  Residual fertilizer (MT)
 
-               nitrogen      kalium
+               nitrogen   phosphate      kalium
 
-potato       456951.692
-rice_wheat   345816.616   26262.247
-combination  425988.182
+potato       676331.692   64233.828
+rice_wheat   565196.616    8179.611   26262.247
+combination  645368.182
 
 
 ----   1277 PARAMETER xveg_resLand  Maximum cropping area with residual land  (1000ha)
@@ -11493,16 +11493,16 @@ potato       941.046,    rice_wheat  1941.275,    combination 1530.493
 
 ----   1277 PARAMETER xveg_resFert  Maximum cropping area with the scarsiest element (1000ha)
 
-                      ( ALL       0.000 )
+rice_wheat 49.573
 
 
 ----   1277 PARAMETER xveg  Post-calculation cropping area (1000ha)
 
-                      ( ALL       0.000 )
+rice_wheat 10.434
 
 
 
-EXECUTION TIME       =        8.765 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
+EXECUTION TIME       =       11.032 SECONDS      5 MB  32.2.0 rc62c018 WEX-WEI
 
 
 USER: Kiyotaka Ishikawa, Single User License         G191217/0001AS-WIN
