@@ -4,7 +4,7 @@ $onText
 Build 2.7b Feb 18 2026
 Simultaneous simulation for cropping and animal production models with 18 crops, 6 processing foods,
 18 feeds, 7 livestocks, 5 animal products and 2 marine products.
-The objective function consists of calorie deficit and net food intake balance of 8 food groups.
+The objective function consists of calorie deficit and net food intake balance of 10 food groups.
 The contstraints on cropping are a) arable land endowments in total acreage and each cropping month;
                                  b) expansion margin;
                                  c) fertilizer supply and usage (constanat or variable) balance by element; and
